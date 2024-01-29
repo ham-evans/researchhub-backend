@@ -16,6 +16,7 @@ from researchhub_document.related_models.constants.document_type import (
     PAPER,
     POSTS,
     QUESTION,
+    GRANT,
     PREREGISTRATION,
 )
 from researchhub_document.related_models.document_filter_model import DocumentFilter
@@ -144,6 +145,8 @@ class ResearchhubUnifiedDocument(SoftDeletableModel, HotScoreMixin, DefaultModel
         elif self.document_type == NOTE:
             return self.note
         elif self.document_type == QUESTION:
+            return self.posts.first()
+        elif self.document_type == GRANT:
             return self.posts.first()
         elif self.document_type == BOUNTY:
             return self.posts.first()

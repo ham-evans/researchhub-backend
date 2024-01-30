@@ -20,6 +20,7 @@ BEST = "BEST"
 TOP = "TOP"
 BOUNTY = "BOUNTY"
 REVIEW = "REVIEW"
+PROPOSAL = "PROPOSAL"
 DISCUSSION = "DISCUSSION"
 REPLICABILITY_COMMENT = "REPLICABILITY_COMMENT"
 CREATED_DATE = "CREATED_DATE"
@@ -41,6 +42,7 @@ PRIVACY_CHOICES = (
 FILTER_CHOICES = (
     (BOUNTY, "Has Bounty"),
     (REVIEW, REVIEW),
+    (PROPOSAL, PROPOSAL),
     (DISCUSSION, DISCUSSION),
     (REPLICABILITY_COMMENT, REPLICABILITY_COMMENT),
     (INNER_CONTENT_COMMENT, INNER_CONTENT_COMMENT),
@@ -180,6 +182,8 @@ class RHCommentFilter(filters.FilterSet):
             )
         elif value == REVIEW:
             qs = qs.filter(comment_type=REVIEW)
+        elif value == PROPOSAL:
+            qs = qs.filter(comment_type=PROPOSAL)
         elif value == INNER_CONTENT_COMMENT:
             qs = qs.filter(comment_type=INNER_CONTENT_COMMENT)
         elif value == DISCUSSION:

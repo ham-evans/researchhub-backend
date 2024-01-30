@@ -183,7 +183,10 @@ class RHCommentFilter(filters.FilterSet):
         elif value == REVIEW:
             qs = qs.filter(comment_type=REVIEW)
         elif value == PROPOSAL:
-            qs = qs.filter(comment_type=PROPOSAL)
+            qs = qs.filter(Q(comment_type=PROPOSAL) | Q(bounties__isnull=False))
+            qs = self._annotate_bounty_sum(
+                qs, annotation_filters=[{"bounties__status": Bounty.OPEN}]
+            )
         elif value == INNER_CONTENT_COMMENT:
             qs = qs.filter(comment_type=INNER_CONTENT_COMMENT)
         elif value == DISCUSSION:
